@@ -11,8 +11,8 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
-
-
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('images', ImageController::class)->middleware('auth:admin')->except(['show']);
+
+Route::resource('products', ProductController::class)->middleware('auth:admin')->except(['show']);
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
