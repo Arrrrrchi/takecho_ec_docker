@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UploadImageRequest;
+use InterventionImage;
+use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class ImageController extends Controller
 {
@@ -12,7 +18,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = Image::orderBy('updated_at', 'desc')->paginate(20);
+        return view('admin.images.index', compact('images'));
     }
 
     /**
@@ -20,23 +27,39 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.images.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UploadImageRequest $request)
     {
-        //
-    }
+        $imageFiles = $request->file('files');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        if (!is_null($imageFiles)) {
+            foreach ($imageFiles as $imageFile) {
+                $fileName = uniqid(rand() . '_');
+                $extension = $imageFile['image']->extension();
+                $fileNameToStore = $fileName . '.' . $extension;
+    
+                $resizedImage =InterventionImage::make($imageFile['image'])->resize(1920, 1080)->encode();
+                Storage::put('public/products/' . $fileNameToStore, $resizedImage);
+
+                Image::create([
+                    'admin_id' => Auth::id(),
+                    'filename' => $fileNameToStore,
+                ]);
+            }
+        }
+
+        return redirect()
+        ->route('admin.images.index')
+        ->with([
+            'message' => '画像を登録しました',
+            'status' => 'info'
+        ]);
+
     }
 
     /**
@@ -44,7 +67,9 @@ class ImageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $image = Image::findOrFail($id);
+
+        return view('admin.images.edit', compact('image'));
     }
 
     /**
@@ -52,7 +77,20 @@ class ImageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'string|max:50'
+        ]);
+
+        $image = Image::findOrFail($id);
+        $image->title = $request->title;
+        $image->save();
+
+        return redirect()
+        ->route('admin.images.index')
+        ->with([
+            'message' => '画像情報を更新しました',
+            'status' => 'info'
+        ]);
     }
 
     /**
@@ -60,6 +98,22 @@ class ImageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $image = Image::findOrFail($id);
+        $filePath = 'public/products' . $image->filename;
+
+        if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
+        }
+
+        $image->delete();
+
+        return redirect()
+        ->route('admin.images.index')
+        ->with([
+            'message' => '画像を削除しました',
+            'status' => 'alert'
+        ]);
+
+
     }
 }
