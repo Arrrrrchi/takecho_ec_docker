@@ -1,16 +1,15 @@
 import './bootstrap';
-
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
-import App from "./App.vue";
+import ModalWindow from "./components/ModalWindow.vue";
 
 createApp({
     components: {
-        App,
+        ModalWindow,
     }
 }).mount('#app');
 
-import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
 
-Alpine.start();
+// import Alpine from 'alpinejs';
+// window.Alpine = Alpine;
+// Alpine.start();
