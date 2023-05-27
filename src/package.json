@@ -14,7 +14,9 @@
         "postcss": "^8.4.23",
         "tailwindcss": "^3.3.2",
         "vite": "^4.0.0",
-        "vue": "^3.3.2",
-        "type": "module"
+        "vue": "^3.3.2"
+    },
+    "dependencies": {
+        "micromodal": "^0.4.10"
     }
 }
