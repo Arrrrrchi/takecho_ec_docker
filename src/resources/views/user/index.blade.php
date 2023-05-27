@@ -2,7 +2,7 @@
     {{-- HERO --}}
     <div class="relative bg-gray-900">
         <div class="relative h-[80vh] bg-center bg-cover">
-            <img class="absolute inset-0 w-full h-full object-cover" src="{{ asset("images/top1.jpg")}}" alt="Hero Image">
+            <img class="absolute inset-0 w-full h-full object-cover" src="{{ asset("images/top1.JPG")}}" alt="Hero Image">
         </div>
     </div>
 
