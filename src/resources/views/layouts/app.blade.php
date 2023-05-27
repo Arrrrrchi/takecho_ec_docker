@@ -11,14 +11,20 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        {{-- CDNで一時対応 --}}
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" id="app">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if(request()->is('admin*'))
+                @include('layouts.admin-navigation')
+            @else
+                @include('layouts.navigation')
+            @endif
 
             <!-- Page Heading -->
             @if (isset($header))
