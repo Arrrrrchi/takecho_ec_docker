@@ -44,7 +44,9 @@
             </div>
             <div class="m-6">
                 <label for="sort_order" class="block text-gray-700 text-sm font-bold mb-2">画像</label>
-                <modal-window :images="$images" name="image1" />
+                <modal-window :images="{{ $images->toJson() }}" name="image1" />
+                <modal-window :images="{{ $images->toJson() }}" name="image2" />
+
             </div>
             <div class="p-2 w-1/2 mx-auto">
                 <div class="relative flex justify-around">

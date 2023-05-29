@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use InterventionImage;
@@ -35,8 +36,6 @@ class ProductController extends Controller
             ->orderby('updated_at', 'desc')
             ->get();
 
-        dd($images);
-
         return view('admin.products.create', compact('categories', 'images'));
     }
 
@@ -45,13 +44,34 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $validated = $request->validated();
+        try {
+            DB::transaction(function () use($request) {
+                $product = Product::create([
+                    'name' => $request->name,
+                    'information' => $request->information,
+                    'price' => $request->price,
+                    'sort_order' => $request->sort_order,
+                    'admin_id' => Auth::id(),
+                    'category_id' => $request->category,
+                    'image1' => $request->image1,
+                    'image2' => $request->image2,
+                    'image3' => $request->image3,
+                    'image4' => $request->image4,
+                    'is_selling' => $request->is_selling,
+                ]);
 
-        $validated['admin_id'] = Auth::id();
-        $validated['category_id'] = $request->category;
-        
-        Product::create($validated);
-        
+                // Stock::create([
+                //     'product_id' => $product->id,
+                //     'type' => 1,
+                //     'quantity' => $request->quantity,
+                // ]);
+            }, 2);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+
         return redirect()
             ->route('admin.products.index')
             ->with([
