@@ -77,12 +77,53 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $categories = Category::all();
 
-        return view('admin.products.edit', compact('product', 'categories'));
+        $images = Image::where('admin_id', Auth::id())
+        ->select('id', 'title', 'filename')
+        ->orderby('updated_at', 'desc')
+        ->get();
+
+        $productImages = [
+            'image1' => $product->imageFirst->filename,
+            'image2' => $product->imageSecond->filename,
+            'image3' => $product->imageThird->filename,
+            'image4' => $product->imageFourth->filename,
+        ];
+        
+        return view('admin.products.edit', compact('product', 'images', 'categories', 'productImages'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
-        //
+
+        $product = Product::findOrFail($id);
+
+        try {
+            DB::transaction(function () use($request, $product) {
+                $product->name = $request->name;
+                $product->information = $request->information;
+                $product->price = $request->price;
+                $product->sort_order = $request->sort_order;
+                $product->category_id = $request->category;
+                $product->image1 = $request->image1;
+                $product->image2 = $request->image2;
+                $product->image3 = $request->image3;
+                $product->image4 = $request->image4;
+                $product->is_selling = $request->is_selling;
+                $product->save();
+            }, 2);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with([
+                'message' => '商品を更新しました',
+                'status' => 'info'
+            ]);
+
     }
 
     public function destroy(string $id)

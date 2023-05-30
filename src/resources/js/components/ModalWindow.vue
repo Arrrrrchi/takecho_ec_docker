@@ -28,45 +28,48 @@
 <script>
 export default {
     data() {
-    return {
-        showContent: {},
-        selectedImageId: {},
-        times: [1, 2, 3, 4]
-    };
+        return {
+            showContent: {},
+            selectedImageId: {},
+            times: [1, 2, 3, 4]
+        };
     },
     props: {
-    images: {
-        type: Array
-    }
+        images: {
+            type: Array
+        },
+        productImages: {
+            type: Object,
+        },
     },
     methods: {
-    openModal(time) {
-        this.showContent[time] = true;
-    },
-    closeModal(time) {
-        this.showContent[time] = false;
-    },
-    stopEvent(event) {
-        event.stopPropagation();
-    },
-    getImagePath(filename) {
-        return `/storage/products/${filename}`;
-    },
-    selectImage(imageId, time) {
-        this.selectedImageId[time] = imageId;
-        this.closeModal(time);
-    },
-    selectedImage(time) {
-        if (this.selectedImageId[time]) {
-        const selectedImage = this.images.find(
-            (image) => image.id === this.selectedImageId[time]
-        );
-        if (selectedImage) {
-            return this.getImagePath(selectedImage.filename);
+        openModal(time) {
+            this.showContent[time] = true;
+        },
+        closeModal(time) {
+            this.showContent[time] = false;
+        },
+        stopEvent(event) {
+            event.stopPropagation();
+        },
+        getImagePath(filename) {
+            return `/storage/products/${filename}`;
+        },
+        selectImage(imageId, time) {
+            this.selectedImageId[time] = imageId;
+            this.closeModal(time);
+        },
+        selectedImage(time) {
+            if (this.selectedImageId[time]) {
+            const selectedImage = this.images.find(
+                (image) => image.id === this.selectedImageId[time]
+            );
+            if (selectedImage) {
+                return this.getImagePath(selectedImage.filename);
+            }
+            }
+            return '';
         }
-        }
-        return '';
-    }
     }
 };
 </script>
