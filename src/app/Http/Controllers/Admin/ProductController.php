@@ -81,14 +81,22 @@ class ProductController extends Controller
         ->select('id', 'title', 'filename')
         ->orderby('updated_at', 'desc')
         ->get();
-
-        $productImages = [
-            'image1' => $product->imageFirst->filename,
-            'image2' => $product->imageSecond->filename,
-            'image3' => $product->imageThird->filename,
-            'image4' => $product->imageFourth->filename,
-        ];
         
+
+        $productImages = [];
+        if ($product->imageFirst && $product->imageFirst->filename) {
+            $productImages[0] = $product->imageFirst->filename;
+        }
+        if ($product->imageSecond && $product->imageSecond->filename) {
+            $productImages[1] = $product->imageSecond->filename;
+        }
+        if ($product->imageThird && $product->imageThird->filename) {
+            $productImages[2] = $product->imageThird->filename;
+        }
+        if ($product->imageFourth && $product->imageFourth->filename) {
+            $productImages[3] = $product->imageFourth->filename;
+        }
+
         return view('admin.products.edit', compact('product', 'images', 'categories', 'productImages'));
     }
 

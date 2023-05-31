@@ -1,28 +1,29 @@
 <template>
-    <div>
+<div>
     <div v-for="time in times" :key="time">
         <div class="m-6 flex items-center">
-        <p>{{ time }}枚目:</p>
-        <button type="button" @click="openModal(time)" class="bg-gray-100 py-2 px-8 ml-6 h-10 border border-gray-300 focus:outline-none hover:bg-gray-400 rounded">画像を選択</button>
-        <div class="w-1/4 ml-10">
-            <img :src="selectedImage(time)" alt="">
+            <p>{{ time }}枚目:</p>
+            <button type="button" @click="openModal(time)" class="bg-gray-100 py-2 px-8 ml-6 h-10 border border-gray-300 focus:outline-none hover:bg-gray-400 rounded">画像を選択</button>
+            <div class="w-1/4 ml-10">
+                <img v-if="hasSelectedImage(time)" :src="getSelectedImagePath(time)" >
+                <img v-else-if="productimages[time - 1] !== null " :src="getImagePath(productimages[time - 1])" >
+            </div>
         </div>
-        </div>
-        <input type="hidden" :name="'image' + time" :id="'image' + time" :value="selectedImageId[time]">
+        <input type="hidden" :name="'image' + time" :id="'image' + time" :value="getSelectedImageId(time)">
 
         <div id="overlay" v-show="showContent[time]" @click="closeModal(time)">
             <div id="content" @click="stopEvent($event)" class="">
-                <h2 class="mb-4">画像ファイルを選択してください</h2>
-                <ul class="flex flex-wrap">
-                    <li v-for="image in images" :key="image.id" @click="selectImage(image.id, time)" class="w-1/4 p-2 md:p-4 mb-2 border rounded-md pointer">
-                        <img :src="getImagePath(image.filename)">
-                    </li>
-                </ul>
-                <button type="button" @click="closeModal(time)" class="bg-gray-100 py-2 px-8 mt-4 block mx-auto border border-gray-300 focus:outline-none hover:bg-gray-400 rounded">閉じる</button>
+            <h2 class="mb-4">画像ファイルを選択してください</h2>
+            <ul class="flex flex-wrap">
+                <li v-for="image in images" :key="image.id" @click="selectImage(image.id, time)" class="w-1/4 p-2 md:p-4 mb-2 border rounded-md pointer">
+                <img :src="getImagePath(image.filename)">
+                </li>
+            </ul>
+            <button type="button" @click="closeModal(time)" class="bg-gray-100 py-2 px-8 mt-4 block mx-auto border border-gray-300 focus:outline-none hover:bg-gray-400 rounded">閉じる</button>
             </div>
         </div>
     </div>
-    </div>
+</div>
 </template>
 
 <script>
@@ -36,11 +37,11 @@ export default {
     },
     props: {
         images: {
-            type: Array
+        type: Array
         },
-        productImages: {
-            type: Object,
-        },
+        productimages: {
+        type: Array
+        }
     },
     methods: {
         openModal(time) {
@@ -59,14 +60,18 @@ export default {
             this.selectedImageId[time] = imageId;
             this.closeModal(time);
         },
-        selectedImage(time) {
-            if (this.selectedImageId[time]) {
+        hasSelectedImage(time) {
+            return this.selectedImageId[time] !== undefined && this.selectedImageId[time] !== '';
+        },
+        getSelectedImageId(time) {
+            return this.selectedImageId[time] || '';
+        },
+        getSelectedImagePath(time) {
             const selectedImage = this.images.find(
                 (image) => image.id === this.selectedImageId[time]
             );
             if (selectedImage) {
                 return this.getImagePath(selectedImage.filename);
-            }
             }
             return '';
         }
@@ -74,7 +79,8 @@ export default {
 };
 </script>
   
-
+  
+  
 <style>
 #overlay {
     /*　要素を重ねた時の順番　*/

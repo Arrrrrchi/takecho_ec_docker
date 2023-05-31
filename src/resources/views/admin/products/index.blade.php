@@ -19,7 +19,11 @@
                     @foreach ($products as $product)
                     <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
                         <a class="block relative h-48 rounded overflow-hidden" href="{{ route('admin.products.edit',['product' => $product->id])}}">
-                        <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{ asset('/storage/products/' . $product->imageFirst->filename)}}">
+                            @if (!empty($product->imageFirst->filename))
+                            <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{ asset('/storage/products/' . $product->imageFirst->filename)}}">
+                            @else
+                            <img src="{{ asset('/images/no_image.jpeg')}}" alt="">
+                            @endif
                         </a>
                         <div class="mt-4">
                             <div class="flex">
