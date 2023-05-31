@@ -52,11 +52,11 @@ class ProductController extends Controller
                     'is_selling' => $request->is_selling,
                 ]);
 
-                // Stock::create([
-                //     'product_id' => $product->id,
-                //     'type' => 1,
-                //     'quantity' => $request->quantity,
-                // ]);
+                Stock::create([
+                    'product_id' => $product->id,
+                    'type' => 1,
+                    'quantity' => $request->quantity,
+                ]);
             }, 2);
         } catch (Throwable $e) {
             Log::error($e);
@@ -85,16 +85,28 @@ class ProductController extends Controller
 
         $productImages = [];
         if ($product->imageFirst && $product->imageFirst->filename) {
-            $productImages[0] = $product->imageFirst->filename;
+            $productImages[0]['id'] = $product->imageFirst->id;
+            $productImages[0]['filename'] = $product->imageFirst->filename;
+        } else {
+            $productImages[0] = '';
         }
         if ($product->imageSecond && $product->imageSecond->filename) {
-            $productImages[1] = $product->imageSecond->filename;
+            $productImages[1]['id'] = $product->imageSecond->id;
+            $productImages[1]['filename'] = $product->imageSecond->filename;
+        } else {
+            $productImages[1] = '';
         }
         if ($product->imageThird && $product->imageThird->filename) {
-            $productImages[2] = $product->imageThird->filename;
+            $productImages[2]['id'] = $product->imageThird->id;
+            $productImages[2]['filename'] = $product->imageThird->filename;
+        } else {
+            $productImages[2] = '';
         }
         if ($product->imageFourth && $product->imageFourth->filename) {
-            $productImages[3] = $product->imageFourth->filename;
+            $productImages[3]['id'] = $product->imageFourth->id;
+            $productImages[3]['filename'] = $product->imageFourth->filename;
+        } else {
+            $productImages[3] = '';
         }
 
         return view('admin.products.edit', compact('product', 'images', 'categories', 'productImages'));
