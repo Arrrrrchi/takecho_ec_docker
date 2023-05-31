@@ -7,7 +7,7 @@
             <div class="w-1/4 ml-10">
                 <img v-if="hasSelectedImage(time)" :src="getSelectedImagePath(time)" >
                 <img v-else-if="productimages[time - 1] !== '' " :src="getImagePath(productimages[time - 1]['filename'])" >
-                <p v-else>設定された画像はありません</p>
+                <p v-else>画像はありません</p>
             </div>
             <button type="button" @click="deleteImage(time)" class="bg-gray-100 py-2 px-8 mt-4 block mx-auto border border-gray-300 focus:outline-none hover:bg-gray-400 rounded">削除</button>
         </div>
@@ -46,7 +46,7 @@ export default {
         },
         productimages: {
         type: Array,
-        default: [],
+        default: ['','','',''],
         }
     },
     methods: {
