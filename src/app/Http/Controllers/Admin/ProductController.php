@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use App\Models\Category;
-use InterventionImage;
 use App\Models\Image;
+use App\Models\Stock;
 
 class ProductController extends Controller
 {
@@ -82,6 +81,7 @@ class ProductController extends Controller
         ->orderby('updated_at', 'desc')
         ->get();
         
+        $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
         $productImages = [];
         if ($product->imageFirst && $product->imageFirst->filename) {
@@ -109,13 +109,29 @@ class ProductController extends Controller
             $productImages[3] = '';
         }
 
-        return view('admin.products.edit', compact('product', 'images', 'categories', 'productImages'));
+        return view('admin.products.edit', compact('product', 'images', 'categories','quantity', 'productImages'));
     }
 
     public function update(ProductRequest $request, string $id)
     {
-
+       
+        $request->validate([
+            'current_quantity' => 'required|integer',
+        ]);
+        
         $product = Product::findOrFail($id);
+
+        $quantity = Stock::where('product_id', $product->id)->sum('quantity');
+
+        /* 編集中に他の人の操作で在庫数が変わっていた時の処理 */
+        if($request->current_quantity !== $quantity) {
+            $id = $request->route()->parameter('product');
+            return redirect()->route('admin.products.edit', ['product' => $id])
+                ->with([
+                    'message' => '在庫数が変更されています。再度確認してください。',
+                    'info' => 'alert'
+                ]);
+        }
 
         try {
             DB::transaction(function () use($request, $product) {
@@ -130,6 +146,17 @@ class ProductController extends Controller
                 $product->image4 = $request->image4;
                 $product->is_selling = $request->is_selling;
                 $product->save();
+
+                if ($request->type === '1') {
+                    $newQuantity = $request->quantity;
+                } elseif ($request->type === '2') {
+                    $newQuantity = $request->quantity * -1;
+                }
+                Stock::create([
+                    'product_id' => $product->id,
+                    'type' => $request->type,
+                    'quantity' => $newQuantity,
+                ]);
             }, 2);
         } catch (Throwable $e) {
             Log::error($e);
@@ -140,7 +167,7 @@ class ProductController extends Controller
         return redirect()
             ->route('admin.products.index')
             ->with([
-                'message' => '商品を更新しました',
+                'message' => '商品情報を更新しました',
                 'status' => 'info'
             ]);
 
