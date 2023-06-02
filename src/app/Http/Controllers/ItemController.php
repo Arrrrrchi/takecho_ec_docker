@@ -13,4 +13,13 @@ class ItemController extends Controller
 
         return view('items.index', compact('products'));
     }
+
+    public function show ($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $quantity = Stock::where('product_id', $product->id)->sum('quantity');
+
+        return view('items.show', compact(('product')));
+    }
 }

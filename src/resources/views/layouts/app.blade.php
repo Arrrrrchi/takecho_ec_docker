@@ -22,8 +22,8 @@
         <div class="min-h-screen bg-gray-100">
             @if(request()->is('admin*'))
                 @include('layouts.admin-navigation')
-            @else
-                @include('layouts.navigation')
+            @elseif(request()->is('user*'))
+                @include('layouts.user-navigation')
             @endif
 
             <!-- Page Heading -->
