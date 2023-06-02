@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Stock;
 
 
 
@@ -56,5 +57,10 @@ class Product extends Model
     public function imageFourth ()
     {
         return $this->belongsTo(Image::class, 'image4', 'id');
+    }
+
+    public function stock ()
+    {
+        return $this->hasMany(Stock::class);
     }
 }
