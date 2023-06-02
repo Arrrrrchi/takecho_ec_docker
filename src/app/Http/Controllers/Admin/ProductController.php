@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
 
         return view('admin.products.index', compact('products'));
     }
@@ -73,7 +73,7 @@ class ProductController extends Controller
 
     public function edit(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('imageFirst', 'imageSecond', 'imageThird', 'imageFourth')->findOrFail($id);
         $categories = Category::all();
 
         $images = Image::where('admin_id', Auth::id())
