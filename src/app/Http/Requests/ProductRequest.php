@@ -27,6 +27,7 @@ class ProductRequest extends FormRequest
             'price' => 'required|integer',
             'is_selling' => 'required|boolean',
             'sort_order' => 'nullable|integer',
+            'quantity' => 'required|integer|between:0,99',
             'category' => 'required|string',
             'image1' => 'nullable|exists:images,id',
             'image2' => 'nullable|exists:images,id',
