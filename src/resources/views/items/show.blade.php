@@ -18,25 +18,27 @@
                                 <div class="h-1/4">
                                     <p class="leading-relaxed">{{ $product->information }}</p>
                                 </div>
-
-                                
                                 <span class="title-font font-medium text-2xl text-gray-900">{{ number_format($product->price) }}<span class="text-sm text-gray-700">円(税込)</span></span>
-                                <form method="post" action="">
-                                    @csrf
-                                    <div class="flex items-center my-4">
-                                        <div class="rerative mr-4">
-                                        <span class="mr-3">数量</span>
-                                            <select name="quantity" class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                                                @for ($i = 1; $i <= $quantity; $i++)
-                                                    <option value="{{$i}}">{{$i}}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                        <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">カートに入れる</button>
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    </div>
-                                </form>
                                 
+                                @if (auth()->check())
+                                    <form method="post" action="{{ route('user.cart.add') }}">
+                                        @csrf
+                                        <div class="flex items-center my-4">
+                                            <div class="rerative mr-4">
+                                            <span class="mr-3">数量</span>
+                                                <select name="quantity" class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                                                    @for ($i = 1; $i <= $quantity; $i++)
+                                                        <option value="{{$i}}">{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">カートに入れる</button>
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        </div>
+                                    </form>
+                                @else
+                                    <a href="{{ route('user.login') }}"><button type="button" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ログイン</button></a>
+                                @endif
                             </div>
                         </div>
                     </div>
