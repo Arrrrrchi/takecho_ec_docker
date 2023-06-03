@@ -30,7 +30,31 @@
                 </div>
             </div>
 
-            @if (Route::has('user.login'))
+            {{-- <div class="sm:flex sm:items-center sm:ml-6">
+                @guest
+                <div class="">
+                    <a href="{{ route('user.login') }}">
+                    <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        ログイン
+                    </button>
+                    </a>
+                </div>
+                @endguest
+
+                @auth
+                <div class="flex">
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            ログアウト
+                        </button>
+                    </form>
+                </div>
+
+                @endauth
+            </div> --}}
+
+            {{-- @if (Route::has('user.login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-3 text-right">
                     @auth('users')
                         <!-- Settings Dropdown -->
@@ -74,11 +98,11 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif --}}
 
 
 
-            <!-- Hamburger -->
+            {{-- <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -122,5 +146,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 </nav>
