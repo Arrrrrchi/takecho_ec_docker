@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            {{-- <div class="sm:flex sm:items-center sm:ml-6">
+            <div class="sm:flex sm:items-center sm:ml-6">
                 @guest
                 <div class="">
                     <a href="{{ route('user.login') }}">
@@ -52,7 +52,7 @@
                 </div>
 
                 @endauth
-            </div> --}}
+            </div>
 
             {{-- @if (Route::has('user.login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-3 text-right">
