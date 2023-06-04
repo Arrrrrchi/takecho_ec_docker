@@ -37,7 +37,7 @@
                                         </div>
                                     </form>
                                 @else
-                                    <a href="{{ route('user.login') }}"><button type="button" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ログイン</button></a>
+                                    <a href="{{ route('user.items.show') }}"><button type="button" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ログイン</button></a>
                                 @endif
                             </div>
                         </div>

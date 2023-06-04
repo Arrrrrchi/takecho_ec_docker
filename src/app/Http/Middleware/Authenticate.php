@@ -17,12 +17,16 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request)
     {
+        // ログインが必要なページへのアクセス時にはリダイレクト先のURLをセッションに保存
+        $request->session()->put('redirect_to', $request->url());
+
+        // ルート名によってリダイレクト先を変更
         if(! $request->expectsJson()){
             if (Route::is('admin.*')) {
                 return route($this->admin_route);
             } elseif (Route::is('user.*')) {
                 return route($this->user_route);
             }
-        }    
+        }
     }
 }

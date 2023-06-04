@@ -27,6 +27,12 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // ログイン後にリダイレクト先のURLがセッションに保存されている場合はそのURLにリダイレクト
+        if ($request->session()->has('redirect_to')) {
+            $redirectTo = $request->session()->pull('redirect_to');
+            return redirect()->to($redirectTo);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
