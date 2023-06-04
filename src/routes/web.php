@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\itemController;
+use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->middleware(['auth:users', 'verified'])->name('dashboard');
+
+Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+Route::get('/show/{item}', [ItemController::class, 'show'])->name('items.show');
 
 Route::prefix('cart')->middleware('auth:users')->group(function () {
     Route::post('add', [CartController::class, 'add'])->name('cart.add');
