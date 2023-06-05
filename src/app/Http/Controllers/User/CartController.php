@@ -109,12 +109,24 @@ class CartController extends Controller
 
     public function success ()
     {
-        dd('成功');
+        Cart::where('user_id', Auth::id())->delete();
+
+        return redirect()->route('user.items.index');
     }
 
     public function cancel ()
     {
-        dd('キャンセル');
+        $user = User::findOrfail(Auth::id());
+
+        foreach ($user->products as $product) {
+            Stock::create([
+                'product_id' => $product->id,
+                'type' => \Constant::PRODUCT_LIST['add'],
+                'quantity' => $product->pivot->quantity,
+            ]);
+        }
+
+        return redirect()->route('user.cart.index');
     }
 
 
