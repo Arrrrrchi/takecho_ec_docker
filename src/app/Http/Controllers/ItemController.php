@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Stock;
-use App\Mail\TestMail;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendTanksMail;
 
 class ItemController extends Controller
 {
@@ -27,8 +26,7 @@ class ItemController extends Controller
 
     public function index ()
     {
-        Mail::to('test@example.com')
-            ->send(new TestMail());
+        SendTanksMail::dispatch();
 
         $products = Product::with('category')->where('is_selling', true)->get();
 
