@@ -8,6 +8,21 @@ use App\Models\Stock;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {   
+        $this->middleware(function ($request, $next){
+            $id = $request->route()->parameter('item');
+            if (!is_null($id)) {
+                $itemId = Product::where('is_selling', true)->where('id', $id)->exists();
+                if (!$itemId) {
+                    abort(404);
+                }
+            } 
+            return $next($request);
+        });
+
+    }
+
     public function index ()
     {
         $products = Product::with('category')->where('is_selling', true)->get();
