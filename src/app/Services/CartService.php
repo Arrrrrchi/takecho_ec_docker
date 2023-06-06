@@ -27,7 +27,7 @@ class CartService
             $result = array_merge($product[0], $adminInfo, $quantity[0]); // 配列の結合
             array_push($products, $result);
         }  
-        dd($products);
+        
         return $products;
     }
 }

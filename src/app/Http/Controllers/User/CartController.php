@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CartService;
+use App\Jobs\SendTanksMail;
 
 
 class CartController extends Controller
@@ -59,9 +60,12 @@ class CartController extends Controller
         ////
         $items = Cart::where('user_id', Auth::id())->get();
         $products = CartService::getItemsInCart($items);
+        $user = User::findOrfail(Auth::id());
+
+        SendTanksMail::dispatch($products, $user);
+        dd('ユーザーメール送信テスト');
         ////
 
-        $user = User::findOrfail(Auth::id());
         $products = $user->products;
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
