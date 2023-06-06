@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
 use App\Jobs\SendContactMail;
+
 
 
 class ContactController extends Controller
@@ -13,7 +15,7 @@ class ContactController extends Controller
         return view('contact.index');
     }
 
-    public function confirm (Request $request)
+    public function confirm (ContactRequest $request)
     {
         $request->validated();
 
@@ -22,7 +24,7 @@ class ContactController extends Controller
         return view('contact.confirm', compact('inputs'));
     }
 
-    public function send (Request $request)
+    public function send (ContactRequest $request)
     {
         $request->validated();
 
@@ -31,7 +33,7 @@ class ContactController extends Controller
         $inputs = $request->except('action');
 
         if ($action !== 'submit') {
-            return redirect()->route('contact.index')->withInput($inputs);
+            return redirect()->route('contact.index', compact('inputs'));
         } else {
             SendContactMail::dispatch($inputs);
             return view('contact.thanks');
