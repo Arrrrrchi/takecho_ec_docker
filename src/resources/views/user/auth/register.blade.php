@@ -48,6 +48,27 @@
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
+            
+            <!-- Address -->
+            <div class="mt-4">
+                <x-input-label for="address" :value="__('address')" />
+                <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                <x-input-error :messages="$errors->get('address')" class="mt-2" />
+            </div>
+            
+            <!-- Postal Code -->
+            <div class="mt-4">
+                <x-input-label for="postal_code" :value="__('postal_code')" />
+                <x-text-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code" :value="old('postal_code')" required />
+                <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />
+            </div>
+            
+            <!-- Phone Number -->
+            <div class="mt-4">
+                <x-input-label for="phone_number" :value="__('phone_number')" />
+                <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required />
+                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('user.login') }}">
