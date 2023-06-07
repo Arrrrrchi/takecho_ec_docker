@@ -15,13 +15,13 @@ class ContactMail extends Mailable
 
     public $name;
     public $email;
-    public $message;
+    public $body;
 
-    public function __construct($inputs)
+    public function __construct($name, $email, $body)
     {
-        $this->name = $inputs['name'];
-        $this->email = $inputs['email'];
-        $this->message = $inputs['message'];
+        $this->name = $name;
+        $this->email = $email;
+        $this->body = $body;
     }
 
     /**
@@ -40,7 +40,7 @@ class ContactMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.contact',
+            view: 'emails.contact',
         );
     }
 

@@ -25,8 +25,8 @@
             <div class="p-2 w-full">
                 <div class="relative">
                 <label class="leading-7 text-sm text-gray-600">お問い合わせ内容</label>
-                <div class="w-full bg-gray-100 bg-opacity-50 rounded focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{!! nl2br(e($inputs['message'])) !!}</div>
-                <input type="hidden" name="message">
+                <div class="w-full bg-gray-100 bg-opacity-50 rounded focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{!! nl2br(e($inputs['body'])) !!}</div>
+                <input type="hidden" name="body" value="{{ $inputs['body'] }}">
                 </div>
             </div>
             <div class="flex p-2 w-full">

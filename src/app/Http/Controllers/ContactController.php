@@ -24,18 +24,18 @@ class ContactController extends Controller
         return view('contact.confirm', compact('inputs'));
     }
 
-    public function send (ContactRequest $request)
+    public function send (Request $request)
     {
-        $request->validated();
-
         $action = $request->input('action');
 
-        $inputs = $request->except('action');
+        $name = $request->name;
+        $email = $request->email;
+        $body = $request->body;
 
         if ($action !== 'submit') {
             return redirect()->route('contact.index', compact('inputs'));
         } else {
-            SendContactMail::dispatch($inputs);
+            SendContactMail::dispatch($name, $email, $body);
             return view('contact.thanks');
         }
     }

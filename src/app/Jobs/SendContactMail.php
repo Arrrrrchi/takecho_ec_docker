@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 
 class SendContactMail implements ShouldQueue
@@ -18,13 +19,13 @@ class SendContactMail implements ShouldQueue
 
     public $name;
     public $email;
-    public $message;
+    public $body;
 
-    public function __construct($inputs)
+    public function __construct($name, $email, $body)
     {
-        $this->name = $inputs['name'];
-        $this->email = $inputs['email'];
-        $this->message = $inputs['message'];
+        $this->name = $name;
+        $this->email = $email;
+        $this->body = $body;
     }
 
     /**
@@ -32,7 +33,12 @@ class SendContactMail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->email)
-        ->send(new ContactMail($this->name, $this->message));
+        try {
+            Mail::to($this->email)
+            ->send(new ContactMail($this->name, $this->email, $this->body));
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            Log::error('メール送信エラー:' . $errorMessage);
+        }
     }
 }
