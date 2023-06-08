@@ -15,14 +15,14 @@
             <!-- Name -->
             <div>
                 <x-input-label for="name" :value="__('Name')" />
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="例）山田太郎"/>
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="例）example@test.com" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
@@ -51,22 +51,22 @@
             
             <!-- Address -->
             <div class="mt-4">
-                <x-input-label for="address" :value="__('address')" />
-                <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                <x-input-label for="address" :value="__('Address')" />
+                <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required placeholder="例）新潟県三条市下田〇〇-△△-□□"/>
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
             
             <!-- Postal Code -->
             <div class="mt-4">
-                <x-input-label for="postal_code" :value="__('postal_code')" />
-                <x-text-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code" :value="old('postal_code')" required />
+                <x-input-label for="postal_code" :value="__('Postal Code')" />
+                <x-text-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code" :value="old('postal_code')" required placeholder="例）〇〇〇-〇〇〇〇"/>
                 <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />
             </div>
             
             <!-- Phone Number -->
             <div class="mt-4">
-                <x-input-label for="phone_number" :value="__('phone_number')" />
-                <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required />
+                <x-input-label for="phone_number" :value="__('Phone Number')" />
+                <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required placeholder="例）〇〇〇-〇〇〇〇-〇〇〇〇" />
                 <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
             </div>
 
