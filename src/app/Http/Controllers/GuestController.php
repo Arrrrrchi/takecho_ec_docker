@@ -9,7 +9,8 @@ class GuestController extends Controller
 {
     public function index ()
     {
-        $response_body = InstagramService::getInstagramRequestBody();
+        $instagramService = new InstagramService();
+        $response_body = $instagramService->getInstagramRequestBody();
 
         return view('index', compact('response_body'));
     }

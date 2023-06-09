@@ -4,21 +4,32 @@ namespace App\Services;
 
 class InstagramService
 {
-    CONST USER_ID = '17841457188089246';
-    CONST POST_COUNT = '9';
-    CONST RECENT_FIELDS = 'id,media_type,media_url,permalink';
-    CONST ACCESS_TOKEN = 'EAAJGm0ZB4ZAI8BALCMGMO5ffz5X9lcGPBZCVevJWyZCWAZBoyc3DpmjYeRiB4oNoxETs2OgLzXSCqCOx2LybLvgnPIDEdZAqUIxdy3g5gSmYo7IK52GFqPU1dvCSc2iIBRWplylGetciAx9xCaZANPLzZA4SKRRANAaxBmCbNY1AJDJGk6IiFZCVI';
+    private $userId;
+    private $postCount;
+    private $targetUser;
+    private $recentFields;
+    private $accessToken;
 
-    public static function getInstagramRequestBody()
+    public function __construct()
+    {
+        $this->userId = env('INSTA_BUSINESS_ID');
+        $this->postCount = '9';
+        $this->targetUser = env('INSTA_TARGET_USER');
+        $this->recentFields = 'id,media_type,media_url,permalink';
+        $this->accessToken = env('META_ACCESS_TOKEN_UNLIMIT');
+    }
+
+    public function getInstagramRequestBody()
     {
         $base_url = 'https://graph.facebook.com/v9.0/';
-        $path = self::USER_ID.'?fields=name,media.limit('.self::POST_COUNT.'){media_type,caption,like_count,media_url,thumbnail_url,permalink,timestamp,username,comments_count}&access_token='.self::ACCESS_TOKEN;
+        $path = $this->userId.'?fields=business_discovery.username('.$this->targetUser.'),media.limit('.$this->postCount.'){media_type,caption,like_count,media_url,thumbnail_url,permalink,timestamp,username,comments_count}&access_token='.$this->accessToken;
+        
         $client = new \GuzzleHttp\Client([
             'base_uri' => $base_url,
         ]);
         $response = $client->request('GET', $path, []);
         $response_body = (string) $response->getBody();
-        
+
         return $response_body;
     }
 }
