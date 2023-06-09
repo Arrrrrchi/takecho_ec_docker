@@ -27,13 +27,14 @@
     {{-- YOUTUBE --}}
     <div class="relative pt-24 pb-24" style="background-color: RGB(248, 244, 241)">
         <div class="relative bg-center bg-cover">
+            <youtube-play-list :response-body="{{ $youtube_api_response }}"/>
         </div>
     </div>
 
     {{-- INSTAGRAM --}}
     <div class="relative bg-white pt-24 pb-24">
         <div class="relative bg-center bg-cover">
-            <my-instagram :response-body="{{ $response_body }}"/>
+            <instagram-post-list :response-body="{{ $instagram_api_response }}"/>
         </div>
     </div>
 

@@ -19,7 +19,7 @@ export default {
     },
     props: {
         responseBody: {
-            type: Array,
+            type: Object,
         },
     },
     mounted() {
