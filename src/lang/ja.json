@@ -1,4 +1,7 @@
 {
+    "Address": "住所",
+    "Postal Code": "郵便番号",
+    "Phone Number": "電話番号",
     "Name": "名前",
     "Profile": "アカウント",
     "Profile Information": "アカウント情報",

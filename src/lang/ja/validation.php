@@ -174,6 +174,7 @@ return [
     */
 
     'attributes' => [
+        'Address' => '住所',
         'address' => '住所',
         'age' => '歳',
         'amount' => '額',
@@ -217,6 +218,7 @@ return [
         'password' => 'パスワード',
         'password_confirmation' => '確認用パスワード',
         'phone' => '電話番号',
+        'phone_number' => '電話番号',
         'photo' => '写真',
         'postal_code' => '郵便番号',
         'prefecture' => '都道府県',

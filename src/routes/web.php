@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\itemController;
 use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Route;

@@ -1,4 +1,4 @@
-<p class="mb-4">{{ $products[0]['adminName'] }} 様の商品が注文されました。</p>
+<p class="mb-4">以下の商品が注文されました。</p>
 
 <div class="mb-4">商品情報</div>
 @foreach ($products as $product)
@@ -12,5 +12,9 @@
     
 <div class="mb-4">購入者情報</div>
 <ul>
-    <li>{{ $user->name }} 様</li>
+    <li>氏名：{{ $user->name }} 様</li>
+    <li>メールアドレス：{{ $user->email }}</li>
+    <li>電話番号：{{ $user->phone_number }}</li>
+    <li>郵便番号：{{ $user->postal_code }}</li>
+    <li>住所：{{ $user->address }}</li>
 </ul>
