@@ -33,8 +33,9 @@
     {{-- INSTAGRAM --}}
     <div class="relative bg-white pt-24 pb-24">
         <div class="relative bg-center bg-cover">
+            <my-instagram :response-body="{{ $response_body }}"/>
         </div>
     </div>
- 
+
 </x-guest-layout>
 
