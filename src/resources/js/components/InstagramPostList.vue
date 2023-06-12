@@ -51,7 +51,7 @@ export default {
     object-fit: cover;
 }
 
-@media (min-width: 390px) {
+@media (max-width: 390px) {
     .grid {
         grid-template-columns: repeat(1, minmax(0, 325px));
     }

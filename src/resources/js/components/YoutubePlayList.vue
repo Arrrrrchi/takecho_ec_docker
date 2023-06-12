@@ -49,7 +49,7 @@
     gap: 1rem;
 }
 
-@media (min-width: 390px) {
+@media (max-width: 390px) {
     .grid-cover {
         margin: 5vw;
     }
