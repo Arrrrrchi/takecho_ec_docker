@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="grid-cover">
     <div class="grid grid-cols-3 gap-4">
         <div v-for="item in posts" :key="item.snippet.resourceId.videoId">
         <a :href="getVideoUrl(item.snippet.resourceId.videoId)" target="_blank">
@@ -47,5 +47,14 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+}
+
+@media (min-width: 390px) {
+    .grid-cover {
+        margin: 5vw;
+    }
+    .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
 }
 </style>
