@@ -26,8 +26,8 @@ export default {
         // Instagram APIレスポンスのデータを代入
         const responseData = this.responseBody;
 
-    // 投稿記事のデータを取得
-    this.posts = responseData.media.data.slice(0, 9);
+        // 投稿記事のデータを取得
+        this.posts = responseData.business_discovery.media.data.slice(0, 9);
     },
 };
 </script>

@@ -18,7 +18,7 @@ class YoutubeService
     public function getYoutubeRequestBody()
     {
         $base_url = 'https://www.googleapis.com/youtube/v3/playlistItems';
-        $path = '?part=snippet&maxResults=4&playlistId=' . $this->playListId .'&key='. $this->apiKey;
+        $path = '?part=snippet&maxResults='. $this->maxResult . '&playlistId=' . $this->playListId .'&key='. $this->apiKey;
         
         // GuzzleHttpクライアントのインスタンスを作成
         $client = new \GuzzleHttp\Client([
