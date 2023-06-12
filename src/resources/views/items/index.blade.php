@@ -1,15 +1,12 @@
 <x-guest-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            商品一覧
-        </h2>
-    </x-slot>
-
     <x-flash-message status="session('status')" />
 
     <div class="py-12">
+        <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
+            <h2 class="text-3xl">商品一覧</h2>
+        </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-hidden sm:rounded-lg">
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-12 mx-auto">
                     <div class="flex flex-wrap -m-4">
