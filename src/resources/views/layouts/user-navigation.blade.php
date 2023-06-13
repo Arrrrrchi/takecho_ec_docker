@@ -3,17 +3,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <p>U</p>
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center w-16">
-                    <a href="{{ route('user.dashboard') }}">
+                    <a href="{{ route('index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
+                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         TOP
                     </x-nav-link>
                     <x-nav-link  :href="route('items.index')" :active="request()->routeIs('items.index')">
@@ -32,30 +31,50 @@
             </div>
 
             <div class="sm:flex sm:items-center sm:ml-6">
-                @guest
-                <div class="">
-                    <a href="{{ route('user.login') }}">
-                    <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                        ログイン
-                    </button>
-                    </a>
-                </div>
-                @endguest
-
-                @auth
-                <div class="flex">
-                    <form method="POST" action="{{ route('user.logout') }}">
-                        @csrf
-                        <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            ログアウト
+                @auth('users')
+                    <div class="">
+                        <a href="{{ route('profile.edit') }}">
+                        <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            {{ Auth::user()->name }}<span> 様</span>
                         </button>
-                    </form>
-                </div>
-
+                        </a>
+                    </div>
+                    <div class="ml-4">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                ログアウト
+                            </button>
+                        </form>
+                    </div>
+                    <div class="ml-4">
+                        <a href="{{ route('cart.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                        </a>
+                    </div>
+                @else
+                    <div class="">
+                        <a href="{{ route('login') }}">
+                        <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            ログイン
+                        </button>
+                        </a>
+                    </div>
+                    <div class="ml-4">
+                        <a href="{{ route('register') }}">
+                        <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            新規作成
+                        </button>
+                        </a>
+                    </div>
                 @endauth
             </div>
 
-            {{-- @if (Route::has('user.login'))
+
+
+            {{-- @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-3 text-right">
                     @auth('users')
                         <!-- Settings Dropdown -->
@@ -74,15 +93,15 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('user.profile.edit')">
+                                    <x-dropdown-link :href="route('profile.edit')">
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 
                                     <!-- Authentication -->
-                                    <form method="POST" action="{{ route('user.logout') }}">
+                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
 
-                                        <x-dropdown-link :href="route('user.logout')"
+                                        <x-dropdown-link :href="route('logout')"
                                                 onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                                             {{ __('Log Out') }}
@@ -92,10 +111,10 @@
                             </x-dropdown>
                         </div>
                     @else
-                        <a href="{{ route('user.login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ログイン</a>
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ログイン</a>
 
-                        @if (Route::has('user.register'))
-                            <a href="{{ route('user.register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">登録</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">登録</a>
                         @endif
                     @endauth
                 </div>
@@ -118,7 +137,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
@@ -131,15 +150,15 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('user.profile.edit')">
+                <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('user.logout') }}">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('user.logout')"
+                    <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}

@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Services\CartService;
 use App\Jobs\SendTanksMail;
 use App\Jobs\SendOrderedMail;
@@ -30,6 +31,8 @@ class CartController extends Controller
 
     public function add (Request $request)
     {
+        Session::start();
+
         $itemInCart = Cart::where('product_id', $request->product_id)
             ->where('user_id', Auth::id())->first();
 
@@ -43,8 +46,10 @@ class CartController extends Controller
                 'quantity' => $request->quantity,
             ]);
         }
+
+        Session::save();
         
-        return redirect()->route('user.cart.index');
+        return redirect()->route('cart.index');
     }
 
     public function delete ($id)
@@ -53,7 +58,7 @@ class CartController extends Controller
             ->where('user_id', Auth::id())
             ->delete();
 
-        return redirect()->route('user.cart.index');        
+        return redirect()->route('cart.index');        
     }
 
     public function checkout ()
@@ -69,7 +74,7 @@ class CartController extends Controller
             $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
             if ($product->pivot->quantity > $quantity) {
-                return redirect()->route('user.cart.index');
+                return redirect()->route('cart.index');
             } else {
                 $stripe_products = $stripe->products->create([
                     'name' => $product->name,
@@ -101,8 +106,8 @@ class CartController extends Controller
         $session = $stripe->checkout->sessions->create([
             'line_items' => [$lineItems],
             'mode' => 'payment',
-            'success_url' => route('user.cart.success'),
-            'cancel_url' => route('user.cart.cancel'),
+            'success_url' => route('cart.success'),
+            'cancel_url' => route('cart.cancel'),
         ]);
 
         $publicKey = env('STRIPE_PUBLIC_KEY');
@@ -122,7 +127,7 @@ class CartController extends Controller
         
         Cart::where('user_id', Auth::id())->delete();
 
-        return redirect()->route('user.items.index');
+        return redirect()->route('items.index');
     }
 
     public function cancel ()
@@ -137,7 +142,7 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->route('user.cart.index');
+        return redirect()->route('cart.index');
     }
 
 

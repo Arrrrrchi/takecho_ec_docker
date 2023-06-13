@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     {{-- HERO --}}
     <div class="relative bg-gray-900">
         <div class="relative h-[80vh] bg-center bg-cover">
@@ -76,5 +76,5 @@
         </div>
     </div>
 
-</x-guest-layout>
+</x-app-layout>
 

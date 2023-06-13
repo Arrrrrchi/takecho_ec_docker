@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\itemController;
 use App\Http\Controllers\User\CartController;
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.welcome');
-});
+Route::get('/', [Controller::class, 'index'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');

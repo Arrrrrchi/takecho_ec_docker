@@ -16,7 +16,7 @@
     </head>
 
     <body class="font-sans text-gray-900 antialiased" id="app">
-        @include('layouts.guest-navigation')
+        @include('layouts.user-navigation')
 
         <!-- Page Heading -->
         @if (isset($header))

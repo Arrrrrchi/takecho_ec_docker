@@ -1,12 +1,12 @@
-<x-guest-layout>
+<x-app-layout>
     <x-flash-message status="session('status')" />
 
-    <div class="py-12">
+    <div class="py-12 bg-white">
         <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
             <h2 class="text-3xl">商品一覧</h2>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden sm:rounded-lg">
+        <div class="overflow-hidden sm:rounded-lg">
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-12 mx-auto">
                     <div class="flex flex-wrap -m-4">
@@ -39,7 +39,4 @@
             </div>
         </div>
     </div>
-
-
-
-</x-guest-layout>
+</x-app-layout>
