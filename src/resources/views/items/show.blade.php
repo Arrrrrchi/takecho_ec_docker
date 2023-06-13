@@ -8,9 +8,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section class="text-gray-600 body-font overflow-hidden">
-                    <div class="container px-5 py-24 mx-auto">
+                    <div class="container px-2 py-24 mx-auto">
                         <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                            <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
+                            <div  class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded">
+                                <image-slider :images="{{ json_encode($images) }}" />
+                            </div>
                             <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                                 
                                 <h2 class="text-sm title-font text-gray-500 tracking-widest">#{{ $product->category->name }}</h2>
@@ -22,7 +24,6 @@
                             </div>
                         </div> 
                         <div class="flex justify-end mr-24">
-                            {{-- @auth('user') --}}
                             <form method="post" action="{{ route('cart.add') }}">
                                 @csrf
                                 <div class="flex items-center my-4">
@@ -38,9 +39,6 @@
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 </div>
                             </form>
-                            {{-- @else
-                            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ログイン</button>
-                            @endauth --}}
                         </div>
                     </div>
                 </section>

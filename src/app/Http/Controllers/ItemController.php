@@ -35,8 +35,15 @@ class ItemController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        $images = [
+            $product->imageFirst->filename ?? null,
+            $product->imageSecond->filename ?? null,
+            $product->imageThird->filename ?? null,
+            $product->imageFourth->filename ?? null,
+        ];
+
         $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
-        return view('items.show', compact('product', 'quantity'));
+        return view('items.show', compact('product', 'images', 'quantity'));
     }
 }
