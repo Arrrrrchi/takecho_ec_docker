@@ -9,7 +9,7 @@ use Throwable;
 
 class Authenticate extends Middleware
 {
-    protected $user_route = 'user.login';
+    protected $user_route = 'login';
     protected $admin_route = 'admin.login';
     
     /**
@@ -18,13 +18,17 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request)
     {
         // ログインが必要なページへのアクセス時にはリダイレクト先のURLをセッションに保存
-        $request->session()->put('redirect_to', $request->url());
+        if ($request->method() === 'POST' || $request->method() === 'PUT') {
+            $request->session()->put('redirect_to', url()->previous());
+        } else {
+            $request->session()->put('redirect_to', $request->url());
+        }
 
         // ルート名によってリダイレクト先を変更
         if(! $request->expectsJson()){
             if (Route::is('admin.*')) {
                 return route($this->admin_route);
-            } elseif (Route::is('user.*')) {
+            } elseif (Route::is('*')) {
                 return route($this->user_route);
             }
         }
