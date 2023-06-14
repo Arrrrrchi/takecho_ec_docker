@@ -21,7 +21,7 @@
                     <x-nav-link>
                         純なめこって？
                     </x-nav-link>
-                    <x-nav-link>
+                    <x-nav-link  :href="route('about')" :active="request()->routeIs('about')">
                         たけちょう商店とは
                     </x-nav-link>
                     <x-nav-link  :href="route('contact.index')" :active="request()->routeIs('contact.index')">
