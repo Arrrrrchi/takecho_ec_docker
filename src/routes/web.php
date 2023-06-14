@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\itemController;
@@ -34,6 +35,10 @@ Route::prefix('cart')->middleware('auth:users')->group(function () {
     Route::get('success', [CartController::class, 'success'])->name('cart.success');
     Route::get('cancel', [CartController::class, 'cancel'])->name('cart.cancel');
 });
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+Route::post('/contact/thanks', [ContactController::class, 'send'])->name('contact.send');
 
 Route::middleware('auth:users')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

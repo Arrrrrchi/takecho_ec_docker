@@ -13,9 +13,9 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        TOP
+                        ホーム
                     </x-nav-link>
-                    <x-nav-link  :href="route('items.index')" :active="request()->routeIs('items.index')">
+                    <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
                         商品一覧
                     </x-nav-link>
                     <x-nav-link>
@@ -24,7 +24,7 @@
                     <x-nav-link>
                         たけちょう商店とは
                     </x-nav-link>
-                    <x-nav-link>
+                    <x-nav-link  :href="route('contact.index')" :active="request()->routeIs('contact.index')">
                         お問い合わせ
                     </x-nav-link>
                 </div>
