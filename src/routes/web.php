@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Controller::class, 'index'])->name('index');
+Route::get('/about', [Controller::class, 'about'])->name('about');
+
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');

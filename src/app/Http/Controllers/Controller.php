@@ -27,4 +27,8 @@ class Controller extends BaseController
         return view('index', compact('products', 'instagram_api_response', 'youtube_api_response'));
     }
 
+    public function about ()
+    {
+        return view('about');
+    }
 }

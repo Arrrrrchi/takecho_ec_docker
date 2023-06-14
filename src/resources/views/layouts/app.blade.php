@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" id="app">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-white">
             @if(request()->is('admin*'))
                 @include('layouts.admin-navigation')
             @else
