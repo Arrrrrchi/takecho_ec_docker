@@ -35,6 +35,8 @@
             <main>
                 {{ $slot }}
             </main>
+            
+            @include('layouts.footer-navi')
         </div>
     </body>
 </html>

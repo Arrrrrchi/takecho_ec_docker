@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
                         商品一覧
                     </x-nav-link>
-                    <x-nav-link>
+                    <x-nav-link  :href="route('nameko')" :active="request()->routeIs('nameko')">
                         純なめこって？
                     </x-nav-link>
                     <x-nav-link  :href="route('about')" :active="request()->routeIs('about')">
