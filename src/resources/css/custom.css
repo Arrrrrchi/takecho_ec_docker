@@ -5,3 +5,23 @@
 .text-container p {
     margin-bottom: 30px;
 }
+
+.img-box {
+    width: 45vw;
+    margin-bottom: 30px;
+}
+
+.img-box img {
+    display: block !important;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 100%;
+}
+
+.site-color-1 {
+    background-color: rgb(248, 244, 241);
+}
+
+.footer-color {
+    background-color: rgb(230, 220, 212);
+}
