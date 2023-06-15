@@ -25,3 +25,24 @@
 .footer-color {
     background-color: rgb(230, 220, 212);
 }
+
+.terms p {
+    margin-left: 1rem;
+}
+
+.terms li {
+    margin-left: 2rem;
+}
+
+.policy p {
+    margin-left: 1rem;
+}
+
+.law dt {
+    margin-bottom: 0.5rem;
+}
+
+.law dd {
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+}

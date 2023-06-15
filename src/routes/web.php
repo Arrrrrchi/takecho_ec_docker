@@ -22,6 +22,8 @@ Route::get('/', [Controller::class, 'index'])->name('index');
 Route::get('/about', [Controller::class, 'about'])->name('about');
 Route::get('/nameko', [Controller::class, 'nameko'])->name('nameko');
 Route::get('/terms', [Controller::class, 'terms'])->name('terms');
+Route::get('/policy', [Controller::class, 'policy'])->name('policy');
+Route::get('/law', [Controller::class, 'law'])->name('law');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');

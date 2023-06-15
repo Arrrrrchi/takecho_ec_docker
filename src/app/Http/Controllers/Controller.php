@@ -41,4 +41,16 @@ class Controller extends BaseController
     {
         return view('terms');
     }
+
+    public function policy ()
+    {
+        return view('policy');
+    }
+
+    public function law ()
+    {
+        return view('specific_trade_law');
+    }
+
+
 }
