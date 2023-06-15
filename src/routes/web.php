@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'index'])->name('index');
 Route::get('/about', [Controller::class, 'about'])->name('about');
-
+Route::get('/nameko', [Controller::class, 'nameko'])->name('nameko');
+Route::get('/terms', [Controller::class, 'terms'])->name('terms');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');

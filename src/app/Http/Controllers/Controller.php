@@ -31,4 +31,14 @@ class Controller extends BaseController
     {
         return view('about');
     }
+
+    public function nameko ()
+    {
+        return view('nameko');
+    }
+
+    public function terms ()
+    {
+        return view('terms');
+    }
 }
