@@ -16,6 +16,10 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        screens: {
+            'xs': '375px',
+            ...defaultTheme.screens,
+        }
     },
 
     plugins: [require('@tailwindcss/forms')],

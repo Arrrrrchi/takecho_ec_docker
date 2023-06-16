@@ -1,19 +1,20 @@
 <x-app-layout>
     {{-- HERO --}}
-    <div class="relative bg-gray-900">
-        <div class="relative h-[80vh] bg-center bg-cover">
-            <img class="absolute inset-0 w-full h-full object-cover" src="{{ asset("images/top1.JPG")}}" alt="Hero Image">
+    <div class="relative">
+        <div class="relative bg-center bg-cover">
+            <auto-fader />
         </div>
     </div>
 
     {{-- BARRNER --}}
-    <div class="relative bg-white h-[80vh] pt-24 pb-24">
-        <div class="relative bg-center bg-cover">
+    <div class="relative site-color-1 pt-24 pb-24">
+        <div class="relative bg-center bg-cover w-1/2 mx-auto">
+            <auto-slider />
         </div>
     </div>
 
     {{-- ITEMS --}}
-    <div class="relative pt-24 pb-24 site-color-1">
+    <div class="relative pt-24 pb-24 bg-white">
         <div class="relative bg-center bg-cover">
             <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
                 <h2 class="text-3xl">商品一覧</h2>
@@ -51,10 +52,10 @@
     </div>
 
     {{-- YOUTUBE --}}
-    <div class="relative pt-24 pb-24 bg-white ">
+    <div class="relative pt-24 pb-24 site-color-1">
         <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
             </svg>
             <h2 class="text-3xl">YouTube新着</h2>
         </div>
@@ -64,10 +65,11 @@
     </div>
 
     {{-- INSTAGRAM --}}
-    <div class="relative pt-24 pb-24 site-color-1">
+    <div class="relative pt-24 pb-24 bg-white">
         <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6 mr-2" viewBox="0 0 24 24">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
             </svg>
             <h2 class="text-3xl">Instagram</h2>
         </div>
