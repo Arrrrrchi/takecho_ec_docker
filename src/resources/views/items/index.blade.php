@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-flash-message status="session('status')" />
 
-    <div class="py-12 bg-white h-[80vh]">
+    <div class="py-12 bg-white min-h-[80vh]">
         <div class="flex justify-center items-center border-b-2 border-yellow-400 mx-12 pb-4">
             <h2 class="text-3xl">商品一覧</h2>
         </div>

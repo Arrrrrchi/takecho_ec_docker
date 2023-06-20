@@ -35,8 +35,9 @@
             <main>
                 {{ $slot }}
             </main>
-            
-            @include('layouts.footer-navi')
+            @if(! request()->is('admin*'))
+                @include('layouts.footer-navi')
+            @endif
         </div>
     </body>
 </html>

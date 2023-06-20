@@ -4,10 +4,10 @@
             <div class="w-16"><x-application-logo /></div>
             <span class="ml-3 text-xl">たけちょう商店</span>
         </a>
-        <div class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 md:flex">
+        <div class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 flex flex-col md:flex-row">
             <a href="{{ route('terms')}}" class="">利用規約</a>
-            <a href="{{ route('policy')}}" class="md:ml-4">プライバシーポリシー</a>
-            <a href="{{ route('law')}}" class="md:ml-4">特定商取引法に基づく表記</a>
+            <a href="{{ route('policy')}}" class="md:ml-4 mt-2 md:mt-0">プライバシーポリシー</a>
+            <a href="{{ route('law')}}" class="md:ml-4 mt-2 md:mt-0">特定商取引法に基づく表記</a>
         </div>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a class="text-gray-500"  href="https://www.facebook.com/takeuchi.syunya" target="_blank">

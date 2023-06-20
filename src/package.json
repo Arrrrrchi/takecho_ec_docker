@@ -17,6 +17,7 @@
         "vue": "^3.3.2"
     },
     "dependencies": {
-        "micromodal": "^0.4.10"
+        "micromodal": "^0.4.10",
+        "vue-router": "^4.2.2"
     }
 }

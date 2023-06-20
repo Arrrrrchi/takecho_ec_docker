@@ -46,3 +46,30 @@
     margin-bottom: 1rem;
     margin-left: 2rem;
 }
+
+.res-navi {
+    visibility: hidden;
+    border-top: solid 1px  rgb(240, 240, 240);
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    background-color: #fff;
+}
+
+.navi-item {
+    width: 100%;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    border-bottom: solid 1px  rgb(240, 240, 240);
+    vertical-align: middle;
+}
+
+.close-button {
+    border-bottom: solid 1px  rgb(240, 240, 240);
+}
+
+.open {
+    visibility: visible;
+    animation-duration: 0.5s;
+    animation-name: fade-in;
+}
