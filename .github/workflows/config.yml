@@ -18,6 +18,6 @@ jobs:
         with:
           node-version: 16.x
 
-      - run: npm ci
-      - run: npm run test
-      - run: npm run build
+      - run: cd src && npm ci
+      - run: cd src && npm run test
+      - run: cd src && npm run build
