@@ -30,11 +30,14 @@ class ProfileTest extends TestCase
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
+                'address' => '東京都文京区後楽１丁目３−６１',
+                'postal_code' => '112-0004',
+                'phone_number' => '090-1234-5678',                
             ]);
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect(route('profile.update'));
 
         $user->refresh();
 
@@ -56,7 +59,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect(route('profile.update'));
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -92,7 +95,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasErrorsIn('userDeletion', 'password')
-            ->assertRedirect('/profile');
+            ->assertRedirect(route('profile.edit'));
 
         $this->assertNotNull($user->fresh());
     }
