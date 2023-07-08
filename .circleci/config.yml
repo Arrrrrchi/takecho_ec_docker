@@ -33,7 +33,7 @@ jobs:
           paths:
             - node_modules
 
-      - run: cd src && LARAVEL_BYPASS_ENV_CHECK=1 npm run dev
+      - run: cd src && LARAVEL_BYPASS_ENV_CHECK=1 npm run dev -d
       - run: 
           name: php test
           command: cd src && ./vendor/bin/phpunit
