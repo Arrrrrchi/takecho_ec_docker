@@ -6,14 +6,14 @@ jobs:
     steps:
       - checkout
 
+      - run:
+      name: pwd && ls -a
+      command: pwd && ls -a
+
       # PHP関連パッケージのインストール
       - restore_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
       - run: cd /src && composer install -n --prefer-dist
-
-      - run:
-          name: pwd && ls -a
-          command: pwd && ls -a
 
       - save_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
