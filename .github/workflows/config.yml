@@ -22,7 +22,7 @@ jobs:
       
       - name: phpunit
         run: |
-          docker-compose exec -T app bash -c "php src/vender/bin/phpunit"
+          docker-compose exec -T app bash -c "php artisan test"
 
       # - name: Set up PHP
       #   uses: shivammathur/setup-php@v2
