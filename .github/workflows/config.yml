@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - run: pwd
+      - run: pwd && ls
 
       - name: docker compose up
         run: docker-compose up -d
