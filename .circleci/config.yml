@@ -12,7 +12,7 @@ jobs:
       # PHP関連パッケージのインストール
       - restore_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
-      - run: cd /src && composer install -n --prefer-dist
+      - run: cd src && composer install -n --prefer-dist
 
       - save_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
@@ -26,7 +26,7 @@ jobs:
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
-               cd /src && npm ci
+               cd src && npm ci
             fi
       - save_cache:
           key: npm-v1-{{ checksum "src/package-lock.json" }}
@@ -36,4 +36,4 @@ jobs:
       - run: npm run dev
       - run: 
           name: php test
-          command: cd /src && ./vendor/bin/phpunit
+          command: cd src && ./vendor/bin/phpunit
