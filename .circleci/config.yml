@@ -11,8 +11,9 @@ jobs:
           key: composer-v1-{{ checksum "src/composer.lock" }}
       - run: cd /src && composer install -n --prefer-dist
 
-      - name: pwd && ls -a
-        run: pwd && ls -a
+      - run:
+          name: pwd && ls -a
+          command: pwd && ls -a
 
       - save_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
