@@ -18,7 +18,7 @@ jobs:
             
       # JavaScript関連パッケージのインストール
       - restore_cache:
-          key: npm-v1-{{ checksum "package-lock.json" }}
+          key: npm-v1-{{ checksum "src/package-lock.json" }}
       - run: 
           name: npm ci
           command: |
@@ -26,7 +26,7 @@ jobs:
               npm ci
             fi
       - save_cache:
-          key: npm-v1-{{ checksum "package-lock.json" }}
+          key: npm-v1-{{ checksum "src/package-lock.json" }}
           paths:
             - node_modules
 
