@@ -17,12 +17,19 @@ jobs:
         run: docker-compose up -d
       
       - name: composer install
-        run: |
-          docker-compose exec -T app bash -c "composer install"
+        run: docker-compose exec -T app bash -c "composer install --no-progress --prefer-dist --no-suggest"
+
+      - name: Generate application key
+        run: docker-compose exec -T app bash -c "php artisan key:generate"
+
+      - name: Migrate
+        run: docker-compose exec -T app bash -c "php artisan migrate"
       
-      - name: phpunit
-        run: |
-          docker-compose exec -T app bash -c "php artisan test"
+      - name: Build Vue application
+        run: docker-compose exec -T app bash -c "npm run prod"
+      
+      - name: laravel test
+        run: docker-compose exec -T app bash -c "php artisan test"
 
       # - name: Set up PHP
       #   uses: shivammathur/setup-php@v2
