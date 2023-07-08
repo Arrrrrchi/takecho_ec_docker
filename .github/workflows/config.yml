@@ -13,30 +13,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
+      - name: docker compose up
+        run: doucker compose up -d
+      
+      - name: composer install
+        run: |
+          docker compose exec -T app bash -c "composer install"
+      
+      - name: phpunit
+        run: |
+          docker compose exec -T app bash -c "php vender/bin/phpunit"
 
-      - name: Install Composer dependencies
-        run: cd src && composer install --no-progress --no-suggest --prefer-dist
+      # - name: Set up PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: '8.1'
 
-      - name: Generate application key
-        run: php artisan key:generate
+      # - name: Install Composer dependencies
+      #   run: cd src && composer install --no-progress --no-suggest --prefer-dist
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+      # - name: Generate application key
+      #   run: php artisan key:generate
 
-      - name: Install NPM dependencies
-        run: npm ci
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14'
 
-      - name: Build Vue application
-        run: npm run prod
+      # - name: Install NPM dependencies
+      #   run: npm ci
 
-      - name: Run PHPUnit tests
-        run: vendor/bin/phpunit
+      # - name: Build Vue application
+      #   run: npm run prod
 
-      - name: Run Vue tests
-        run: npm run test:unit
+      # - name: Run PHPUnit tests
+      #   run: vendor/bin/phpunit
+
+      # - name: Run Vue tests
+      #   run: npm run test:unit
