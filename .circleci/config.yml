@@ -3,24 +3,17 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1.21-node
-
+    
     steps:
       - checkout
       - run:
           name: pwd && ls -a
           command: pwd && ls -a
-          
-      - run: cd src
-
-      - run:
-          name: pwd && ls -a
-          command: pwd && ls -a
-
 
       # PHP関連パッケージのインストール
       - restore_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
-      - run: composer install -n --prefer-dist
+      - run: cd src && composer install -n --prefer-dist
 
       - save_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
@@ -34,14 +27,14 @@ jobs:
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
-               npm ci
+               cd src && npm ci
             fi
       - save_cache:
           key: npm-v1-{{ checksum "src/package-lock.json" }}
           paths:
             - node_modules
 
-      - run: LARAVEL_BYPASS_ENV_CHECK=1 npm run dev
+      - run: cd src && LARAVEL_BYPASS_ENV_CHECK=1 npm run dev
       - run: 
           name: php test
-          command: ./vendor/bin/phpunit
+          command: cd src && ./vendor/bin/phpunit
