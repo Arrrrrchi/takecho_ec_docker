@@ -36,10 +36,11 @@ jobs:
             - node_modules
 
       # MySQLサーバの起動
-      - run: |
-          sudo service mysql start
-          sleep 10
-          
+      - run:
+          name: Start MySQL
+          command: sudo service mysql start && sleep 10
+          requires: - image: cimg/mysql:8.0
+
       # アセットのビルド
       - run: cd src && npm run build
 
