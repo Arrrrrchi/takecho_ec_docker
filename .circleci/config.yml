@@ -33,6 +33,9 @@ jobs:
           key: npm-v1-{{ checksum "src/package-lock.json" }}
           paths:
             - node_modules
+      - run: cd src && php artisan key:generate
+
+      - run: cd src && php artisan migrate
 
       - run: cd src && npm run build
       - run: 
