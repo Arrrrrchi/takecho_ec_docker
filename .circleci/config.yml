@@ -35,11 +35,14 @@ jobs:
           paths:
             - node_modules
 
-      # MySQLサーバの起動
-      # - run:
-      #     name: Start MySQL
-      #     command: sudo service mysql start && sleep 10
-      #     requires: docker
+      # MySQLコンテナの起動と待機
+      - run:
+          name: Start MySQL
+          command: |
+            docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d cimg/mysql:8.0
+            sleep 10
+          requires:
+            - docker
 
       # アセットのビルド
       - run:
@@ -50,4 +53,5 @@ jobs:
       - run: 
           name: PHP test
           command: cd src && php artisan test
-          requires: docker
+          requires:
+            - docker
