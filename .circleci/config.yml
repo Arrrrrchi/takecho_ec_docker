@@ -36,10 +36,10 @@ jobs:
             - node_modules
 
       # MySQLサーバの起動
-      - run:
-          name: Start MySQL
-          command: sudo service mysql start && sleep 10
-          requires: docker
+      # - run:
+      #     name: Start MySQL
+      #     command: sudo service mysql start && sleep 10
+      #     requires: docker
 
       # アセットのビルド
       - run: cd src && npm run build
