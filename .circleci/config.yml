@@ -42,8 +42,12 @@ jobs:
       #     requires: docker
 
       # アセットのビルド
-      - run: cd src && npm run build
+      - run:
+          name: npm run build
+          command: cd src && npm run build
 
       # テストの実行
-      - run: cd src && php artisan test
+      - run: 
+          name: PHP test
+          command: cd src && php artisan test
           requires: docker
