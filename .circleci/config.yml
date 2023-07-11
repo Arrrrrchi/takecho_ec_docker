@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Start MySQL
           command: sudo service mysql start && sleep 10
-          requires: - image: cimg/mysql:8.0
+          requires: - docker
 
       # アセットのビルド
       - run: cd src && npm run build
