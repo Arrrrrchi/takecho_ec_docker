@@ -47,8 +47,6 @@ jobs:
           paths:
             - node_modules
 
-      - run: sleep 60
-
       # マイグレーション
       - run: cd src && php artisan migrate
 
