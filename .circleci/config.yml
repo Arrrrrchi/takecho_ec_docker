@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1.21-node
+      - image: cimg/mysql:8.0
     
     steps:
       - checkout
@@ -33,7 +34,14 @@ jobs:
           key: npm-v1-{{ checksum "src/package-lock.json" }}
           paths:
             - node_modules
+
+      # MySQLサーバの起動
+      - run: |
+          sudo service mysql start
+          sleep 10
+          
+      # アセットのビルド
       - run: cd src && npm run build
-      - run: 
-          name: php test
-          command: cd src && php artisan test
+
+      # テストの実行
+      - run: cd src && php artisan test
