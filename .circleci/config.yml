@@ -3,7 +3,19 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1.21-node
+          environment:
+            APP_ENV: testing
+            DB_CONNECTION: mysql
+            DB_HOST: 127.0.0.1
+            DB_DATABASE: testing
+            DB_USERNAME: 'root'
+            DB_PASSWORD: ''
       - image: cimg/mysql:8.0
+          environment:
+            MYSQL_DATABASE: testing
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+            TZ: Asia/Tokyo
     
     steps:
       - checkout
@@ -35,7 +47,7 @@ jobs:
           paths:
             - node_modules
 
-      - run: sleep 180
+      - run: sleep 60
 
       # MySQLサーバの起動
       - run:
