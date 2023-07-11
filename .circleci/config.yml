@@ -3,19 +3,19 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1.21-node
-          environment:
-              APP_ENV: testing
-              DB_CONNECTION: mysql
-              DB_HOST: 127.0.0.1
-              DB_DATABASE: testing
-              DB_USERNAME: 'root'
-              DB_PASSWORD: ''
+        environment:
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: testing
+          DB_USERNAME: 'root'
+          DB_PASSWORD: ''
       - image: cimg/mysql:8.0
-          environment:
-              MYSQL_DATABASE: testing
-              MYSQL_ROOT_HOST: '%'
-              MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-              TZ: Asia/Tokyo
+        environment:
+          MYSQL_DATABASE: testing
+          MYSQL_ROOT_HOST: '%'
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          TZ: Asia/Tokyo
     
     steps:
       - checkout
@@ -31,7 +31,7 @@ jobs:
       - save_cache:
           key: composer-v1-{{ checksum "src/composer.lock" }}
           paths:
-            - vender
+            - vendor
             
       # JavaScript関連パッケージのインストール
       - restore_cache:
@@ -40,7 +40,7 @@ jobs:
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
-               cd src && npm ci
+              cd src && npm ci
             fi
       - save_cache:
           key: npm-v1-{{ checksum "src/package-lock.json" }}
