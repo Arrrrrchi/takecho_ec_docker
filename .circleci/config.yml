@@ -49,11 +49,8 @@ jobs:
 
       - run: sleep 60
 
-      # MySQLサーバの起動
-      - run:
-          name: Start MySQL
-          command: sudo service mysql start && sleep 10
-          requires: docker
+      # マイグレーション
+      - run: cd src && php artisan migrate
 
       # アセットのビルド
       - run:
