@@ -34,7 +34,7 @@ jobs:
           paths:
             - node_modules
 
-      - run: cp .env.example .env
+      - run: cd src && cp .env.example .env
       - run: cd src && php artisan key:generate
       - run: cd src && php artisan migrate
       - run: cd src && npm run build
