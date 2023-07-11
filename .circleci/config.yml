@@ -36,4 +36,4 @@ jobs:
       - run: cd src && npm run build
       - run: 
           name: php test
-          command: cd src && ./vendor/bin/phpunit
+          command: cd src && php artisan test
