@@ -46,3 +46,4 @@ jobs:
 
       # テストの実行
       - run: cd src && php artisan test
+          requires: docker
