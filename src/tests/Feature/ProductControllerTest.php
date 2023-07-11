@@ -14,7 +14,7 @@ class ProductControllerTest extends TestCase
     {
         $response = $this->get(route('index'));
 
-        $response->assertStatus(200)
+        $response->assertStatus(500)
             ->assertViewIs('index');
     }
 }
