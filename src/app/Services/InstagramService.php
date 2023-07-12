@@ -19,7 +19,7 @@ class InstagramService
 
     public function getInstagramRequestBody()
     {
-        $base_url = 'https://graph.facebook.com/v15.0/';
+        $base_url = 'https://graph.facebook.com/v17.0/';
         $path = $this->userId . '?fields=business_discovery.username(' . $this->targetUser . '){media.limit(' . $this->postCount .'){media_type,media_url,permalink}}&access_token=' . $this->accessToken;
         
         $client = new \GuzzleHttp\Client([
