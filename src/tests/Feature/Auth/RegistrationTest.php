@@ -26,7 +26,7 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
             'address' => '東京都文京区後楽１丁目３−６１',
             'postal_code' => '112-0004',
-            'phone_number' => '090-1234-5678',            
+            'phone_number' => '090-1234-5678',
         ]);
 
         $this->assertAuthenticated();
