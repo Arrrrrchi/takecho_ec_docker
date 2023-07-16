@@ -60,3 +60,32 @@ jobs:
           name: PHP test
           command: cd src && php artisan test
           requires: docker
+
+  deploy:
+    docker:
+      - image: cimg/php:8.1.21-node
+    steps:
+      - add_ssh_keys
+      - run:
+          name: deploy
+          command: |
+            ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd takecho-ec/src/ && \
+              git pull origin main && \
+              composer install -n --no-dev --prefer-dist && \
+              npm ci && \
+              npm run build && \
+              php artisan migrate --force && \
+              php artisan config:cache"
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
