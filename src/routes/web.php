@@ -3,7 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\itemController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Route;
 
