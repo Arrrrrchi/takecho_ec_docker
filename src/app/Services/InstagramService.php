@@ -11,10 +11,10 @@ class InstagramService
 
     public function __construct()
     {
-        $this->userId = env('INSTA_BUSINESS_ID');
+        $this->userId = config('services.instagram.id');
         $this->postCount = '9';
-        $this->targetUser = env('INSTA_TARGET_USER');
-        $this->accessToken = env('META_ACCESS_TOKEN_UNLIMIT');
+        $this->targetUser = config('services.instagram.target_user');
+        $this->accessToken = config('services.meta.unlimit_token');
     }
 
     public function getInstagramRequestBody()

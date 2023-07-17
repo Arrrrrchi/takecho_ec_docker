@@ -10,8 +10,8 @@ class YoutubeService
 
     public function __construct()
     {
-        $this->apiKey = env('GOOGLE_YOUTUBE_API');
-        $this->playListId = env('YOUTUBE_PLAY_LIST_ID');
+        $this->apiKey = config('services.youtube.api');
+        $this->playListId = config('services.youtube.play_list_id');
         $this->maxResult = '4'; // 取得する件数
     }
 
