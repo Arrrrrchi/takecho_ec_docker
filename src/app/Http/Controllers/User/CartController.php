@@ -65,7 +65,7 @@ class CartController extends Controller
     {
         $user = User::findOrfail(Auth::id());
         $products = $user->products;
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+        $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 
         $lineItems = [];
 
@@ -110,7 +110,7 @@ class CartController extends Controller
             'cancel_url' => route('cart.cancel'),
         ]);
 
-        $publicKey = env('STRIPE_PUBLIC_KEY');
+        $publicKey = config('services.stripe.public');
 
         return view('user.checkout', compact('session', 'publicKey'));
     }
