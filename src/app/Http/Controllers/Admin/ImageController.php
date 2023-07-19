@@ -51,8 +51,8 @@ class ImageController extends Controller
                 // Storage::put('public/products/' . $fileNameToStore, $resizedImage);
 
                 // S3へのアップロード
-                // $path = Storage::disk('s3')->put('products' . $fileNameToStore, $resizedImage, 'public');
-                $path = Storage::disk('s3')->putFile('products', $imageFile, 'public');
+                $path = Storage::disk('s3')->put('products/' . $fileNameToStore, $resizedImage, 'public');
+                // $path = Storage::disk('s3')->putFile('products', $imageFile, 'public');
 
                 // $user->image = Storage::disk('s3')->url($path);
 
