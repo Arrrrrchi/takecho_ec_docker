@@ -41,23 +41,20 @@ class ImageController extends Controller
 
         if (!is_null($imageFiles)) {
             foreach ($imageFiles as $imageFile) {
-                $post = new Post;
-
                 $fileName = uniqid(rand() . '_');
                 $extension = $imageFile['image']->extension();
                 $fileNameToStore = $fileName . '.' . $extension;
-
-                $path = Storage::disk('s3')->putFile('product', $imageFiles, 'public');
-                $post->image_path = Storage::disk('s3')->url($path);
-                $post->save();
 
                 $resizedImage =InterventionImage::make($imageFile['image'])->resize(1920, 1080)->encode();
 
                 // ローカルのpublic/products/フォルダ内に保存
                 // Storage::put('public/products/' . $fileNameToStore, $resizedImage);
 
-                 // S3へのアップロード
-                Storage::disk('s3')->put('products/' . $fileNameToStore, $resizedImage, 'public');
+                // S3へのアップロード
+                // $path = Storage::disk('s3')->put('products' . $fileNameToStore, $resizedImage, 'public');
+                $path = Storage::disk('s3')->putFile('products', $imageFile, 'public');
+
+                // $user->image = Storage::disk('s3')->url($path);
 
                 Image::create([
                     'admin_id' => Auth::id(),
