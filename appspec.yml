@@ -2,15 +2,15 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/webapp/takecho-ec/src
+    destination: /home/webapp/takecho-ec
 
 permissions:
-  - object: /home/webapp/takecho-ec/src
+  - object: /home/webapp/takecho-ec
     owner: webapp
     group: webapp
 
 hooks:
   AfterInstall:
-    - location: ./scripts/after_install.sh
+    - location: ./src/scripts/after_install.sh
       timeout: 60
       runas: webapp
