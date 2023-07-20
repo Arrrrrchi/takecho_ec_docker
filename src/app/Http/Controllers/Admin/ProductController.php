@@ -124,12 +124,12 @@ class ProductController extends Controller
         $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
         /* 編集中に他の人の操作で在庫数が変わっていた時の処理 */
-        if($request->current_quantity !== $quantity) {
+        if($request->current_quantity != $quantity) {
             $id = $request->route()->parameter('product');
             return redirect()->route('admin.products.edit', ['product' => $id])
                 ->with([
                     'message' => '在庫数が変更されています。再度確認してください。',
-                    'info' => 'alert'
+                    'status' => 'alert'
                 ]);
         }
 
