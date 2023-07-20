@@ -48,10 +48,10 @@ class ImageController extends Controller
                 $resizedImage =InterventionImage::make($imageFile['image'])->resize(1920, 1080)->encode();
 
                 // ローカルのpublic/products/フォルダ内に保存
-                // Storage::put('public/products/' . $fileNameToStore, $resizedImage);
+                Storage::put('public/products/' . $fileNameToStore, $resizedImage);
 
                 // S3へのアップロード
-                $path = Storage::disk('s3')->put('/', $resizedImage, 'public');
+                // $path = Storage::disk('s3')->put('/', $resizedImage, 'public');
 
                 Image::create([
                     'admin_id' => Auth::id(),
