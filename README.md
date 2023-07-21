@@ -1,6 +1,9 @@
 ## Overview
 Docker + Laravel10 + Mysql + phpMyAdminの開発テンプレート
 
+![takecho-ec_top_image](https://github.com/Arrrrrchi/takecho_ec_docker/assets/89783339/4830317f-2ff5-493c-88e2-f9def6eb9c46)
+
+
 ## Requirement
 - macOS
 - Docker 20.10.17
