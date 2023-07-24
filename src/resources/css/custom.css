@@ -73,3 +73,15 @@
     animation-duration: 0.5s;
     animation-name: fade-in;
 }
+
+@media (max-width: 860px) {
+    .img-box {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 390px) {
+    .img-box {
+        width: 85vw;
+    }
+}

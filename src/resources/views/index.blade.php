@@ -8,7 +8,7 @@
 
     {{-- BARRNER --}}
     <div class="relative site-color-1 pt-24 pb-24">
-        <div class="relative bg-center bg-cover w-1/2 mx-auto">
+        <div class="relative bg-center bg-cover w-1/2 md:mx-auto">
             <auto-slider />
         </div>
     </div>

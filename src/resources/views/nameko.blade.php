@@ -17,7 +17,7 @@
             </p>
             <div class="md:flex justify-around">
                 <div class="img-box"><img src="{{ asset("images/nameko_shelf.jpg")}}" alt="なめこの棚"></div>
-                <div class="img-box ml-6"><img src="{{ asset("images/nameko_harvest.jpg")}}" alt="なめこの収穫"></div>
+                <div class="img-box md:ml-6"><img src="{{ asset("images/nameko_harvest.jpg")}}" alt="なめこの収穫"></div>
             </div>
         </div>
 

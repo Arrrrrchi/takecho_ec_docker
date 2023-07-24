@@ -99,7 +99,7 @@
 <script>
     const res_navi = document.getElementById('res-navi');
     function naviOpen() {
-        res_navi.classList.remove('open');
+        res_navi.classList.add('open');
         console.log('opened');
         console.log(res_navi);
     }
