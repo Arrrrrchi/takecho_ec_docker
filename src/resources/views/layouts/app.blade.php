@@ -11,8 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+         <!-- Scripts -->
+        <link rel="stylesheet" href="{{ secure_asset('resources/css/app.css') }}">
+        <script src="{{ secure_asset('resources/js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased" id="app">
         <div class="min-h-screen bg-white">
