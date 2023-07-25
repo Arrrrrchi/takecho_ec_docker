@@ -25,7 +25,7 @@ export default {
     mounted() {
         setInterval(() => {
             this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        }, 5000);
+        }, 10000);
     }
 };
 </script>
