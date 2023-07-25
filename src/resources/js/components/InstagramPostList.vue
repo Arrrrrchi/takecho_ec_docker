@@ -5,8 +5,9 @@
             <a :href="post.permalink" target="_blank">
                 <template v-if="post.media_type === 'VIDEO'">
                     <video controls :src="post.media_url" class="video">
-                        <source src="post.media_url#t=0.1" type="video/mp4">
+                        <source :src="post.media_url" type="video/mp4">
                     </video>
+                    <img :src="thumbnail" :alt="post.username" class="image" />
                 </template>
                 <template v-else-if="post.media_type === 'CAROUSEL_ALBUM'">
                     <img :src="post.media_url" :alt="post.username" class="image" />
@@ -35,6 +36,18 @@ export default {
 
         // 投稿記事のデータを取得
         this.posts = responseData.business_discovery.media.data.slice(0, 9);
+
+        // 動画のサムネイルを取得する処理
+        const videoPlayer = this.$refs.videoPlayer;
+        videoPlayer.currentTime = 0.1;
+        videoPlayer.addEventListener('seeked', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoPlayer.videoWidth;
+            canvas.height = videoPlayer.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
+            this.thumbnail = canvas.toDataURL();
+        });
     },
 };
 </script>
