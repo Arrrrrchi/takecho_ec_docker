@@ -5,7 +5,7 @@
             <a :href="post.permalink" target="_blank">
                 <template v-if="post.media_type === 'VIDEO'">
                     <video controls :src="post.media_url" class="video">
-                        <source src="post.media_url + '#t=0.1'">
+                        <source :src="post.media_url + '#t=0.1'">
                     </video>
                 </template>
                 <template v-else-if="post.media_type === 'CAROUSEL_ALBUM'">
