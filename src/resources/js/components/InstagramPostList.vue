@@ -1,60 +1,43 @@
 <template>
     <div class="flex justify-center">
-      <div class="grid grid-cols-3 gap-1">
+    <div class="grid grid-cols-3 gap-1">
         <div v-for="post in posts" :key="post.id" class="media-box">
-          <a :href="post.permalink" target="_blank">
-            <template v-if="post.media_type === 'VIDEO'">
-              <div class="thumbnail-container">
-                <video controls :src="post.media_url" class="video" ref="videoPlayer" @loadedmetadata="generateThumbnail"></video>
-                <img :src="thumbnail" :alt="post.username" class="video-image" />
-              </div>
-            </template>
-            <template v-else-if="post.media_type === 'CAROUSEL_ALBUM'">
-              <img :src="post.media_url" :alt="post.username" class="image" />
-            </template>
-          </a>
+            <a :href="post.permalink" target="_blank">
+                <template v-if="post.media_type === 'VIDEO'">
+                    <video controls :src="post.media_url" class="video">
+                        <source :src="post.media_url + '#t=0.1'">
+                    </video>
+                </template>
+                <template v-else-if="post.media_type === 'CAROUSEL_ALBUM'">
+                    <img :src="post.media_url" :alt="post.username" class="image" />
+                </template>
+            </a>
         </div>
-      </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
+    </div>
+</template>
+
+<script>
+export default {
     data() {
-      return {
-        posts: [],
-        thumbnail: "", // サムネイル画像のURLを保持する変数を追加
-      };
+        return {
+            posts: [],
+        };
     },
     props: {
-      responseBody: {
-        type: Object,
-      },
-    },
-    methods: {
-      generateThumbnail() {
-        const videoPlayer = this.$refs.videoPlayer;
-        if (videoPlayer && videoPlayer.readyState >= 4) {
-          videoPlayer.currentTime = 0.1;
-          videoPlayer.addEventListener('seeked', () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = videoPlayer.videoWidth;
-            canvas.height = videoPlayer.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
-            this.thumbnail = canvas.toDataURL();
-          }, { once: true }); // seeked イベントのリスナーは一度だけ実行するようにする
-        }
-      },
+        responseBody: {
+            type: Object,
+        },
     },
     mounted() {
-      const responseData = this.responseBody;
-      if (responseData && responseData.business_discovery && responseData.business_discovery.media) {
+        // Instagram APIレスポンスのデータを代入
+        const responseData = this.responseBody;
+
+        // 投稿記事のデータを取得
         this.posts = responseData.business_discovery.media.data.slice(0, 9);
-      }
     },
-  };
-  </script>
+};
+</script>
 
 <style scoped>
 .grid {
@@ -70,17 +53,6 @@
     overflow: hidden;
 }
 
-.link {
-    z-index: 10;
-}
-
-.thumbnail-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
 .image {
     height: 25vw;
     max-height: 325px;
@@ -89,19 +61,10 @@
     object-fit: cover;
 }
 
-.video-image {
-    height: 25vw;
-    max-height: 325px;
-    width: 100%;
-    max-width: 325px;
-    object-fit: cover;
-    position: absolute;
-    z-index: -10;
-}
-
 .video {
     object-fit: cover;
     width: 100%;
+    position: absolute;
     top: -35%;
     pointer-events: none;
 }
