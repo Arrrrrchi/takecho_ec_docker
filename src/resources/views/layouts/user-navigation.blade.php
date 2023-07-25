@@ -3,11 +3,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
 
-            <!-- Hamburger -->
-            <div class="block md:hidden mt-5 cursor-pointer" id="hamburger" onclick="naviOpen()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <!-- ハンバーガーアイコン -->
+            <div class="block md:hidden mt-5 cursor-pointer" id="hamburger" x-on:click="open = !open">
+                <!-- `x-show`ディレクティブを使って、メニューアイコンの表示を切り替えます -->
+                <svg xmlns="http://www.w3.org/2000/svg" x-show="!open" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>                  
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" x-show="open" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </div>
             
             <div class="flex">
@@ -83,12 +87,7 @@
     </div>
 
     <!-- Responsive Navigation Links -->
-    <div class="res-navi flex flex-col text-center content-center" id="res-navi">
-        <div class="close-button block md:hidden p-5 cursor-pointer" id="close-button" onclick="naviClose()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>              
-        </div>
+    <div class="res-navi flex flex-col text-center content-center" x-bind:class="{'is-active' : open }">
         <a href="{{ route('index') }}"><div class="navi-item">ホーム</div></a>
         <a href="{{ route('items.index') }}"><div class="navi-item">商品一覧</div></a>
         <a href="{{ route('nameko') }}"><div class="navi-item">純なめこって？</div></a>
@@ -96,17 +95,3 @@
         <a href="{{ route('contact.index') }}"><div class="navi-item">お問い合わせ</div></a>
     </div>
 </nav>
-<script>
-    const res_navi = document.getElementById('res-navi');
-    function naviOpen() {
-        res_navi.classList.add('open');
-        console.log('opened');
-        console.log(res_navi);
-    }
-
-    function naviClose() {
-        res_navi.classList.remove('open');
-        console.log('closed');
-        console.log(res_navi);
-    }
-</script>    
