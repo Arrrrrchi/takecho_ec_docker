@@ -4,9 +4,7 @@
         <div v-for="post in posts" :key="post.id" class="media-box">
             <a :href="post.permalink" target="_blank">
                 <template v-if="post.media_type === 'VIDEO'">
-                    <video controls :src="post.media_url" class="video">
-                        <source :src="post.media_url + '#t=0.1'">
-                    </video>
+                    <source controls :src="post.media_url" type="video/mp4" class="video">
                 </template>
                 <template v-else-if="post.media_type === 'CAROUSEL_ALBUM'">
                     <img :src="post.media_url" :alt="post.username" class="image" />
