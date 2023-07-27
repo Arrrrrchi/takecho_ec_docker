@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function index ()
     {
-        $products = Product::with('category')->where('is_selling', true)->get();
+        $products = Product::with('category')->where('is_selling', true)->paginate(4);
 
         $instagramService = new InstagramService();
         $instagram_api_response = $instagramService->getInstagramRequestBody();

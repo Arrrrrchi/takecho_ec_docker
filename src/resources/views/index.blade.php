@@ -46,6 +46,8 @@
                     </div>
                     @endforeach
                     </div>
+                    {{-- ページネーション --}}
+                    <div class="mt-4">{{ $products->links() }}</div>
                 </div>
             </section>
         </div>
