@@ -1,108 +1,67 @@
-<nav x-data="{ open: false }" class="bg-orange-100 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
+
+            <!-- ハンバーガーアイコン -->
+            <div class="block md:hidden mt-5 cursor-pointer" id="hamburger" x-on:click="open = !open">
+                <!-- `x-show`ディレクティブを使って、メニューアイコンの表示を切り替えます -->
+                <svg xmlns="http://www.w3.org/2000/svg" x-show="!open" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" x-show="open" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
             <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center w-20">
-                    <a href="{{ route('admin.products.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                <div class="shrink-0 flex items-center w-22">
+                    <h1 class="font-bold bg-orange-500 text-white rounded p-1 ml-4">管理者画面</h1>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
+                <div class="hidden space-x-8 md:-my-px md:ml-10 sm:flex ">
                     <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
                         商品管理
                     </x-nav-link>
                     <x-nav-link :href="route('admin.images.index')" :active="request()->routeIs('admin.images.index')">
                         画像管理
                     </x-nav-link>
-
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
+            <div class="md:flex md:items-center md:ml-6 mt-2 lg:mt-0">
+                @auth('admin')
+                    <div class="ml-4">
+                        <a href="{{ route('admin.profile.edit') }}">
+                        <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            登録情報
                         </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('admin.profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
+                        </a>
+                    </div>
+                    <div class="ml-4">
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('admin.logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                ログアウト
+                            </button>
                         </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                    </div>
+                @else
+                    <div class="">
+                        <a href="{{ route('admin.login') }}">
+                        <button class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            ログイン
+                        </button>
+                        </a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                商品管理
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.images.index')" :active="request()->routeIs('admin.images.index')">
-                画像管理
-            </x-responsive-nav-link>
-
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('admin.profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('admin.logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('admin.logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        </div>
+    <!-- Responsive Navigation Links -->
+    <div class="res-navi flex flex-col text-center content-center" x-bind:class="{'is-active' : open }">
+        <a href="{{ route('admin.products.index') }}"><div class="navi-item">商品管理</div></a>
+        <a href="{{ route('admin.images.index') }}"><div class="navi-item">画像管理</div></a>
     </div>
 </nav>
