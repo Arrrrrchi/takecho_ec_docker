@@ -25,14 +25,6 @@ use App\Http\Controllers\Admin\ImageController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admin', 'verified'])->name('dashboard');
-
 Route::middleware('auth:admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
