@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Stock;
-
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -26,7 +26,18 @@ class ItemController extends Controller
 
     public function index ()
     {
-        $products = Product::with('category')->where('is_selling', true)->get();
+        // 在庫情報を取得するクエリ
+        $stocks = DB::table('t_stocks')
+            ->select('product_id', DB::raw('sum(quantity) as quantity'))
+            ->groupBy('product_id')
+            ->having('quantity', '>=', 1)
+            ->pluck('quantity', 'product_id'); // 在庫数を商品IDをキーにした連想配列で取得
+
+        // 在庫が1以上の商品のみ取得するクエリ
+        $products = Product::with('category')
+            ->where('is_selling', true)
+            ->whereIn('id', array_keys($stocks->toArray())) // 在庫がある商品IDのみを絞り込む
+            ->get();
 
         return view('items.index', compact('products'));
     }
