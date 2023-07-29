@@ -127,7 +127,7 @@ class CartController extends Controller
         
         Cart::where('user_id', Auth::id())->delete();
 
-        return redirect()->route('items.index');
+        return redirect()->route('items.thanks');
     }
 
     public function cancel ()
@@ -142,7 +142,12 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->route('cart.index');
+        return redirect()
+            ->route('cart.index')
+            ->with([
+                'message' => '購入をキャンセルしました',
+                'status' => 'alert'
+            ]);
     }
 
 
