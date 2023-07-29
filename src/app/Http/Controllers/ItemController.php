@@ -57,4 +57,9 @@ class ItemController extends Controller
 
         return view('items.show', compact('product', 'images', 'quantity'));
     }
+
+    public function thanks ()
+    {
+        return view('items.thanks');
+    }
 }

@@ -31,6 +31,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 Route::get('/show/{item}', [ItemController::class, 'show'])->name('items.show');
+Route::get('/items/thanks', [ItemController::class, 'thanks'])->name('items.thanks');
 
 Route::prefix('cart')->middleware('auth:users')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
