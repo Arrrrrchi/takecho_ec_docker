@@ -31,7 +31,12 @@ class SendTanksMail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user)
-        ->send(new ThanksMail($this->products, $this->user));
+        try {
+            Mail::to($this->user->email)
+            ->send(new ThanksMail($this->products, $this->user));
+        } catch (\Exception $e) {
+            $errorMessege = $e->getMessage();
+            Log::error('メール送信エラー:' . $errorMessege);
+        }
     }
 }
