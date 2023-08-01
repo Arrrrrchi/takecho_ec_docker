@@ -73,5 +73,12 @@
     .grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
+    .image-box:nth-child(odd) {
+        justify-self: center;
+    }
+    .image-box:nth-child(even) {
+        justify-self: center;
+    }
+
 }
 </style>
