@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -49,5 +49,4 @@ class ControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertViewIs('terms');
     }
-
 }

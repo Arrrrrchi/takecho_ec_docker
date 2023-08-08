@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers\User;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class ProfileTest extends TestCase
 {
