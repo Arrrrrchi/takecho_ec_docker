@@ -7,6 +7,10 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ asset("images/takecho_logo.png")}}" type="image/vnd.microsoft.icon" /> 
+        <link rel="icon" href="{{ asset("images/takecho_logo.png")}}" type="image/vnd.microsoft.icon" />
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
